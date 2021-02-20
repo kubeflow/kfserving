@@ -32,7 +32,9 @@ const (
 	StorageInitializerContainerImage        = "gcr.io/kfserving/storage-initializer"
 	StorageInitializerContainerImageVersion = "latest"
 	PvcURIPrefix                            = "pvc://"
+	LocalFilePrefix                         = "file://"
 	PvcSourceMountName                      = "kfserving-pvc-source"
+	LocalFileMountName                      = "kfserving-local-source"
 	PvcSourceMountPath                      = "/mnt/pvc"
 )
 
@@ -139,7 +141,33 @@ func (mi *StorageInitializerInjector) InjectStorageInitializer(pod *v1.Pod) erro
 		// modify the sourceURI to point to the PVC path
 		srcURI = PvcSourceMountPath + "/" + pvcPath
 	}
+	var isLocal bool = false
+	if strings.HasPrefix(srcURI, LocalFilePrefix) {
+		isLocal = true
+		path, err := parseLocalFileURI(srcURI)
+		if err != nil {
+			return err
+		}
+		localSourceVolume := v1.Volume{
+			Name: LocalFileMountName,
+			VolumeSource: v1.VolumeSource{
+				HostPath: &v1.HostPathVolumeSource{
+					Path: path,
+				},
+			},
+		}
+		podVolumes = append(podVolumes, localSourceVolume)
 
+		// add a corresponding PVC volume mount to the INIT container
+		localSourceVolumeMount := v1.VolumeMount{
+			Name:      LocalFileMountName,
+			MountPath: constants.DefaultModelLocalMountPath,
+			ReadOnly:  true,
+		}
+		// Since the model path is linked from source pvc, userContainer also need to mount the pvc.
+		userContainer.VolumeMounts = append(userContainer.VolumeMounts, localSourceVolumeMount)
+
+	}
 	// Create a volume that is shared between the storage-initializer and kfserving-container
 	sharedVolume := v1.Volume{
 		Name: StorageInitializerVolumeName,
@@ -188,7 +216,11 @@ func (mi *StorageInitializerInjector) InjectStorageInitializer(pod *v1.Pod) erro
 		MountPath: constants.DefaultModelLocalMountPath,
 		ReadOnly:  true,
 	}
-	userContainer.VolumeMounts = append(userContainer.VolumeMounts, sharedVolumeReadMount)
+	// only mount localpath
+	if !isLocal {
+		userContainer.VolumeMounts = append(userContainer.VolumeMounts, sharedVolumeReadMount)
+	}
+
 	// Change the CustomSpecStorageUri env variable value to the default model path if present
 	for index, envVar := range userContainer.Env {
 		if envVar.Name == constants.CustomSpecStorageUriEnvVarKey && envVar.Value != "" {
@@ -209,8 +241,10 @@ func (mi *StorageInitializerInjector) InjectStorageInitializer(pod *v1.Pod) erro
 		return err
 	}
 
-	// Add init container to the spec
-	pod.Spec.InitContainers = append(pod.Spec.InitContainers, *initContainer)
+	if !isLocal {
+		// Add init container to the spec
+		pod.Spec.InitContainers = append(pod.Spec.InitContainers, *initContainer)
+	}
 
 	return nil
 }
@@ -228,4 +262,8 @@ func parsePvcURI(srcURI string) (pvcName string, pvcPath string, err error) {
 	}
 
 	return pvcName, pvcPath, nil
+}
+func parseLocalFileURI(srcURI string) (localPath string, err error) {
+	path := strings.TrimPrefix(srcURI, LocalFilePrefix)
+	return path, nil
 }

@@ -95,8 +95,10 @@ func (mutator *Mutator) mutate(pod *v1.Pod, configMap *v1.ConfigMap) error {
 
 	mutators := []func(pod *v1.Pod) error{
 		InjectGKEAcceleratorSelector,
+		InjectNodeSelector,
 		storageInitializer.InjectStorageInitializer,
 		loggerInjector.InjectLogger,
+		//MuteImageTag,
 	}
 
 	for _, mutator := range mutators {

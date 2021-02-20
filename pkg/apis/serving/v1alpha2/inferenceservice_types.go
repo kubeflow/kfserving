@@ -99,7 +99,8 @@ type PredictorSpec struct {
 	// Spec for ONNX runtime (https://github.com/microsoft/onnxruntime)
 	ONNX *ONNXSpec `json:"onnx,omitempty"`
 	// Spec for PyTorch predictor
-	PyTorch *PyTorchSpec `json:"pytorch,omitempty"`
+	PyTorch      *PyTorchSpec      `json:"pytorch,omitempty"`
+	ApulisVision *ApulisVisionSpec `json:"apulisVision,omitempty"`
 
 	DeploymentSpec `json:",inline"`
 }
@@ -149,6 +150,16 @@ type AlibiExplainerSpec struct {
 
 // TensorflowSpec defines arguments for configuring Tensorflow model serving.
 type TensorflowSpec struct {
+	// The location of the trained model
+	StorageURI string `json:"storageUri"`
+	// Allowed runtime versions are specified in the inferenceservice config map.
+	RuntimeVersion string `json:"runtimeVersion,omitempty"`
+	// Defaults to requests and limits of 1CPU, 2Gb MEM.
+	Resources v1.ResourceRequirements `json:"resources,omitempty"`
+}
+
+// ApulisVisionSpec defines arguments for configuring ApulisVision model serving.
+type ApulisVisionSpec struct {
 	// The location of the trained model
 	StorageURI string `json:"storageUri"`
 	// Allowed runtime versions are specified in the inferenceservice config map.
@@ -213,7 +224,8 @@ type PyTorchSpec struct {
 
 // CustomSpec provides a hook for arbitrary container configuration.
 type CustomSpec struct {
-	Container v1.Container `json:"container"`
+	Container v1.Container            `json:"container"`
+	Resources v1.ResourceRequirements `json:"resources,omitempty"`
 }
 
 // EndpointStatusMap defines the observed state of InferenceService endpoints
