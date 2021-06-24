@@ -136,8 +136,18 @@ func TestONNXRuntimeDefaulter(t *testing.T) {
 				MultiModelServer:    false,
 			},
 		},
+		Defaults: IsvcDefaultConfig{
+			Request: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+			Limit: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+		},
 	}
-	defaultResource = v1.ResourceList{
+	defaultResource := v1.ResourceList{
 		v1.ResourceCPU:    resource.MustParse("1"),
 		v1.ResourceMemory: resource.MustParse("2Gi"),
 	}
@@ -221,6 +231,16 @@ func TestCreateONNXRuntimeContainer(t *testing.T) {
 				ContainerImage:      "mcr.microsoft.com/onnxruntime/server",
 				DefaultImageVersion: "v1.0.0",
 				MultiModelServer:    false,
+			},
+		},
+		Defaults: IsvcDefaultConfig{
+			Request: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+			Limit: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
 			},
 		},
 	}
@@ -377,10 +397,16 @@ func TestONNXRuntimeIsMMS(t *testing.T) {
 					MultiModelServer:    mmsCase,
 				},
 			},
-		}
-		defaultResource = v1.ResourceList{
-			v1.ResourceCPU:    resource.MustParse("1"),
-			v1.ResourceMemory: resource.MustParse("2Gi"),
+			Defaults: IsvcDefaultConfig{
+				Request: map[v1.ResourceName]resource.Quantity{
+					"cpu":    resource.MustParse("1"),
+					"memory": resource.MustParse("2Gi"),
+				},
+				Limit: map[v1.ResourceName]resource.Quantity{
+					"cpu":    resource.MustParse("1"),
+					"memory": resource.MustParse("2Gi"),
+				},
+			},
 		}
 		scenarios := map[string]struct {
 			spec     PredictorSpec
@@ -430,10 +456,16 @@ func TestONNXRuntimeIsFrameworkSupported(t *testing.T) {
 				SupportedFrameworks: []string{onnx},
 			},
 		},
-	}
-	defaultResource = v1.ResourceList{
-		v1.ResourceCPU:    resource.MustParse("1"),
-		v1.ResourceMemory: resource.MustParse("2Gi"),
+		Defaults: IsvcDefaultConfig{
+			Request: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+			Limit: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+		},
 	}
 	scenarios := map[string]struct {
 		spec      PredictorSpec
