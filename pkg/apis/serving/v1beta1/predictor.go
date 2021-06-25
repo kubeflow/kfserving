@@ -17,9 +17,10 @@ limitations under the License.
 package v1beta1
 
 import (
+	"reflect"
+
 	"github.com/kubeflow/kfserving/pkg/constants"
 	v1 "k8s.io/api/core/v1"
-	"reflect"
 )
 
 // PredictorImplementation defines common functions for all predictors e.g Tensorflow, Triton, etc
@@ -31,6 +32,8 @@ type PredictorImplementation interface {
 // PredictorSpec defines the configuration for a predictor,
 // The following fields follow a "1-of" semantic. Users must specify exactly one spec.
 type PredictorSpec struct {
+	// Spec for CatBoost model server
+	CatBoost *CatBoostSpec `json:"catboost,omitempty"`
 	// Spec for SKLearn model server
 	SKLearn *SKLearnSpec `json:"sklearn,omitempty"`
 	// Spec for XGBoost model server
@@ -88,6 +91,7 @@ func (s *PredictorSpec) GetImplementations() []ComponentImplementation {
 		s.ONNX,
 		s.PMML,
 		s.LightGBM,
+		s.CatBoost,
 	})
 	// This struct is not a pointer, so it will never be nil; include if containers are specified
 	if len(s.PodSpec.Containers) != 0 {
@@ -117,6 +121,7 @@ func (s *PredictorSpec) GetPredictorImplementations() []PredictorImplementation 
 		s.ONNX,
 		s.PMML,
 		s.LightGBM,
+		s.CatBoost,
 	})
 	// This struct is not a pointer, so it will never be nil; include if containers are specified
 	if len(s.PodSpec.Containers) != 0 {
