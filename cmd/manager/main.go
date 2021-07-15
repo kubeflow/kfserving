@@ -23,8 +23,8 @@ import (
 	"github.com/kubeflow/kfserving/pkg/apis/serving/v1alpha1"
 	"github.com/kubeflow/kfserving/pkg/apis/serving/v1alpha2"
 	"github.com/kubeflow/kfserving/pkg/apis/serving/v1beta1"
-	trainedmodelcontroller "github.com/kubeflow/kfserving/pkg/controller/v1alpha1/trainedmodel"
 	graphcontroller "github.com/kubeflow/kfserving/pkg/controller/v1alpha1/inferencegraph"
+	trainedmodelcontroller "github.com/kubeflow/kfserving/pkg/controller/v1alpha1/trainedmodel"
 	"github.com/kubeflow/kfserving/pkg/controller/v1alpha1/trainedmodel/reconcilers/modelconfig"
 	v1beta1controller "github.com/kubeflow/kfserving/pkg/controller/v1beta1/inferenceservice"
 	"github.com/kubeflow/kfserving/pkg/webhook/admission/pod"
@@ -143,10 +143,10 @@ func main() {
 	setupLog.Info("Setting up InferenceGraph controller")
 	inferenceGraphEventBroadcaster.StartRecordingToSink(&typedcorev1.EventSinkImpl{Interface: clientSet.CoreV1().Events("")})
 	if err = (&graphcontroller.InferenceGraphReconciler{
-		Client:                mgr.GetClient(),
-		Log:                   ctrl.Log.WithName("v1alpha1Controllers").WithName("InferenceGraph"),
-		Scheme:                mgr.GetScheme(),
-		Recorder:              eventBroadcaster.NewRecorder(mgr.GetScheme(), v1.EventSource{Component: "GraphController"}),
+		Client:   mgr.GetClient(),
+		Log:      ctrl.Log.WithName("v1alpha1Controllers").WithName("InferenceGraph"),
+		Scheme:   mgr.GetScheme(),
+		Recorder: eventBroadcaster.NewRecorder(mgr.GetScheme(), v1.EventSource{Component: "GraphController"}),
 	}).SetupWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create controller", "v1alpha1Controllers", "InferenceGraph")
 		os.Exit(1)
