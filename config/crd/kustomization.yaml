@@ -10,6 +10,7 @@
 resources:
 - serving.kubeflow.org_inferenceservices.yaml
 - serving.kubeflow.org_trainedmodels.yaml
+- serving.kubeflow.org_inferencegraphs.yaml
 
 patchesJson6902:
   # Fix for https://github.com/kubernetes/kubernetes/issues/91395
