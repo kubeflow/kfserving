@@ -37,6 +37,16 @@ func TestARTExplainer(t *testing.T) {
 				DefaultImageVersion: "latest",
 			},
 		},
+		Defaults: IsvcDefaultConfig{
+			Request: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+			Limit: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+		},
 	}
 
 	scenarios := map[string]struct {
@@ -82,6 +92,16 @@ func TestCreateARTExplainerContainer(t *testing.T) {
 			ARTExplainer: ExplainerConfig{
 				ContainerImage:      "kfserving/art-server",
 				DefaultImageVersion: "latest",
+			},
+		},
+		Defaults: IsvcDefaultConfig{
+			Request: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+			Limit: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
 			},
 		},
 	}
@@ -144,6 +164,16 @@ func TestCreateARTExplainerContainerWithConfig(t *testing.T) {
 				DefaultImageVersion: "latest",
 			},
 		},
+		Defaults: IsvcDefaultConfig{
+			Request: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+			Limit: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+		},
 	}
 	ComponentExtensionSpec := ComponentExtensionSpec{
 		MaxReplicas: 2,
@@ -201,6 +231,16 @@ func TestARTExplainerIsMMS(t *testing.T) {
 			ARTExplainer: ExplainerConfig{
 				ContainerImage:      "kfserving/art-server",
 				DefaultImageVersion: "latest",
+			},
+		},
+		Defaults: IsvcDefaultConfig{
+			Request: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+			Limit: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
 			},
 		},
 	}

@@ -186,3 +186,14 @@ data:
         "cpuRequest": "100m",
         "cpuLimit": "1"
     }
+  defaults: |-
+    {
+        "request": {
+            "cpu": "1",
+            "memory": "2Gi"
+        },
+        "limit": {
+            "cpu": "1",
+            "memory": "2Gi"
+        },
+    }

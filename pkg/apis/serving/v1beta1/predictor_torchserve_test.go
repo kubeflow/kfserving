@@ -47,6 +47,16 @@ func TestTorchServeValidation(t *testing.T) {
 				},
 			},
 		},
+		Defaults: IsvcDefaultConfig{
+			Request: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+			Limit: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+		},
 	}
 	scenarios := map[string]struct {
 		spec    PredictorSpec
@@ -165,11 +175,21 @@ func TestTorchServeDefaulter(t *testing.T) {
 				},
 			},
 		},
+		Defaults: IsvcDefaultConfig{
+			Request: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+			Limit: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+		},
 	}
 
 	protocolV1 := constants.ProtocolV1
 
-	defaultResource = v1.ResourceList{
+	defaultResource := v1.ResourceList{
 		v1.ResourceMemory: resource.MustParse("2Gi"),
 		v1.ResourceCPU:    resource.MustParse("1"),
 	}
@@ -289,6 +309,16 @@ func TestCreateTorchServeModelServingContainerV1(t *testing.T) {
 					DefaultImageVersion: "0.2.0",
 					MultiModelServer:    false,
 				},
+			},
+		},
+		Defaults: IsvcDefaultConfig{
+			Request: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+			Limit: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
 			},
 		},
 	}
@@ -472,6 +502,16 @@ func TestCreateTorchServeModelServingContainerV2(t *testing.T) {
 				},
 			},
 		},
+		Defaults: IsvcDefaultConfig{
+			Request: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+			Limit: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+		},
 	}
 	g := gomega.NewGomegaWithT(t)
 	scenarios := map[string]struct {
@@ -575,15 +615,21 @@ func TestTorchServeIsMMS(t *testing.T) {
 					},
 				},
 			},
+			Defaults: IsvcDefaultConfig{
+				Request: map[v1.ResourceName]resource.Quantity{
+					"cpu":    resource.MustParse("1"),
+					"memory": resource.MustParse("2Gi"),
+				},
+				Limit: map[v1.ResourceName]resource.Quantity{
+					"cpu":    resource.MustParse("1"),
+					"memory": resource.MustParse("2Gi"),
+				},
+			},
 		}
 
 		protocolV1 := constants.ProtocolV1
 		protocolV2 := constants.ProtocolV2
 
-		defaultResource = v1.ResourceList{
-			v1.ResourceMemory: resource.MustParse("2Gi"),
-			v1.ResourceCPU:    resource.MustParse("1"),
-		}
 		scenarios := map[string]struct {
 			spec     PredictorSpec
 			expected bool
@@ -652,15 +698,21 @@ func TestTorchServeIsFrameworkSupported(t *testing.T) {
 				},
 			},
 		},
+		Defaults: IsvcDefaultConfig{
+			Request: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+			Limit: map[v1.ResourceName]resource.Quantity{
+				"cpu":    resource.MustParse("1"),
+				"memory": resource.MustParse("2Gi"),
+			},
+		},
 	}
 
 	protocolV1 := constants.ProtocolV1
 	protocolV2 := constants.ProtocolV2
 
-	defaultResource = v1.ResourceList{
-		v1.ResourceCPU:    resource.MustParse("1"),
-		v1.ResourceMemory: resource.MustParse("2Gi"),
-	}
 	scenarios := map[string]struct {
 		spec      PredictorSpec
 		framework string
