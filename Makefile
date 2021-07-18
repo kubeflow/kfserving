@@ -44,7 +44,7 @@ deploy: manifests
 	cd config/default && if [ ${KFSERVING_ENABLE_SELF_SIGNED_CA} != false ]; then \
 	kustomize edit remove resource certmanager/certificate.yaml; \
 	else kustomize edit add resource certmanager/certificate.yaml; fi;
-	kustomize build config/default | kubectl apply --validate=false -f -
+	kustomize build config/default | kubectl apply -f -
 	if [ ${KFSERVING_ENABLE_SELF_SIGNED_CA} != false ]; then ./hack/self-signed-ca.sh; fi;
 
 deploy-dev: manifests
@@ -53,28 +53,28 @@ deploy-dev: manifests
 	cd config/default && if [ ${KFSERVING_ENABLE_SELF_SIGNED_CA} != false ]; then \
 	kustomize edit remove resource certmanager/certificate.yaml; \
 	else kustomize edit add resource certmanager/certificate.yaml; fi;
-	kustomize build config/overlays/development | kubectl apply --validate=false -f -
+	kustomize build config/overlays/development | kubectl apply -f -
 	if [ ${KFSERVING_ENABLE_SELF_SIGNED_CA} != false ]; then ./hack/self-signed-ca.sh; fi;
 
 deploy-dev-sklearn: docker-push-sklearn
 	./hack/model_server_patch_dev.sh sklearn ${KO_DOCKER_REPO}/${SKLEARN_IMG}
-	kustomize build config/overlays/dev-image-config | kubectl apply --validate=false -f -
+	kustomize build config/overlays/dev-image-config | kubectl apply -f -
 
 deploy-dev-xgb: docker-push-xgb
 	./hack/model_server_patch_dev.sh xgboost ${KO_DOCKER_REPO}/${XGB_IMG}
-	kustomize build config/overlays/dev-image-config | kubectl apply --validate=false -f -
+	kustomize build config/overlays/dev-image-config | kubectl apply -f -
 
 deploy-dev-lgb: docker-push-lgb
 	./hack/model_server_patch_dev.sh lightgbm ${KO_DOCKER_REPO}/${LGB_IMG}
-	kustomize build config/overlays/dev-image-config | kubectl apply --validate=false -f -
+	kustomize build config/overlays/dev-image-config | kubectl apply -f -
 
 deploy-dev-pytorch: docker-push-pytorch
 	./hack/model_server_patch_dev.sh pytorch ${KO_DOCKER_REPO}/${PYTORCH_IMG}
-	kustomize build config/overlays/dev-image-config | kubectl apply --validate=false -f -
+	kustomize build config/overlays/dev-image-config | kubectl apply -f -
 
 deploy-dev-pmml : docker-push-pmml
 	./hack/model_server_patch_dev.sh sklearn ${KO_DOCKER_REPO}/${PMML_IMG}
-	kustomize build config/overlays/dev-image-config | kubectl apply --validate=false -f -
+	kustomize build config/overlays/dev-image-config | kubectl apply -f -
 
 deploy-dev-paddle: docker-push-paddle
 	./hack/model_server_patch_dev.sh paddle ${KO_DOCKER_REPO}/${PADDLE_IMG}
@@ -82,11 +82,11 @@ deploy-dev-paddle: docker-push-paddle
 
 deploy-dev-alibi: docker-push-alibi
 	./hack/alibi_patch_dev.sh ${KO_DOCKER_REPO}/${ALIBI_IMG}
-	kustomize build config/overlays/dev-image-config | kubectl apply --validate=false -f -
+	kustomize build config/overlays/dev-image-config | kubectl apply -f -
 
 deploy-dev-storageInitializer: docker-push-storageInitializer
 	./hack/storageInitializer_patch_dev.sh ${KO_DOCKER_REPO}/${STORAGE_INIT_IMG}
-	kustomize build config/overlays/dev-image-config | kubectl apply --validate=false -f -
+	kustomize build config/overlays/dev-image-config | kubectl apply -f -
 
 deploy-ci: manifests
 	kustomize build config/overlays/test | kubectl apply -f -
