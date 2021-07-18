@@ -1,0 +1,619 @@
+updates:
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: .
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: tools/tf2openapi
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: python
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/explanation/aix/mnist/rfserver
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/explanation/art/mnist/sklearnserver
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1beta1/triton/torchscript
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1beta1/triton/bert/bert_tokenizer_v2
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1beta1/transformer/torchserve_image_transformer
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1beta1/custom/torchserve/torchserve-image
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1beta1/torchserve/model-archiver/model-archiver-image
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1alpha2/triton/bert/bert_tokenizer
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1alpha2/transformer/image_transformer
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1alpha2/custom/hello-world
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1alpha2/custom/grpc-server
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1alpha2/custom/kfserving-custom-model/model-server
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1alpha2/custom/customized-urls
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/kafka
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/apis
+  open-pull-requests-limit: 10
+  package-ecosystem: docker
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - jinchihe
+  - yuzisun
+  directory: python/kfserving
+  open-pull-requests-limit: 10
+  package-ecosystem: pip
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/explanation/aix/mnist
+  open-pull-requests-limit: 10
+  package-ecosystem: pip
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/explanation/alibi/imagenet
+  open-pull-requests-limit: 10
+  package-ecosystem: pip
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/explanation/alibi/income
+  open-pull-requests-limit: 10
+  package-ecosystem: pip
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/explanation/alibi/moviesentiment
+  open-pull-requests-limit: 10
+  package-ecosystem: pip
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1beta1/sklearn
+  open-pull-requests-limit: 10
+  package-ecosystem: pip
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1beta1/xgboost
+  open-pull-requests-limit: 10
+  package-ecosystem: pip
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1alpha2/onnx
+  open-pull-requests-limit: 10
+  package-ecosystem: pip
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1alpha2/custom/hello-world
+  open-pull-requests-limit: 10
+  package-ecosystem: pip
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1alpha2/custom/kfserving-custom-model
+  open-pull-requests-limit: 10
+  package-ecosystem: pip
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: docs/samples/v1alpha2/custom/kfserving-custom-model/model-server
+  open-pull-requests-limit: 10
+  package-ecosystem: pip
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+- assignees:
+  - ellistarn
+  - yuzisun
+  - cliveseldon
+  - animeshsingh
+  - rakelkar
+  - deadeyegoodwin
+  directory: .
+  open-pull-requests-limit: 10
+  package-ecosystem: gomod
+  reviewers:
+  - iamlovingit
+  - ifilonenko
+  - jinchihe
+  - salanki
+  - tomcli
+  - pugangxa
+  - yuzliu
+  - adriangonz
+  schedule:
+    interval: daily
+version: 2
