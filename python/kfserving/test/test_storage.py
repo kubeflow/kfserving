@@ -37,20 +37,6 @@ FILE_ZIP_RAW = binascii.unhexlify('504b030414000800080035b6705200000000000000000
                                   '0000000a481000000006d6f64656c2e70746855540d000786c5506086c5506086c5506075780b000104f'
                                   '50100000414000000504b0506000000000100010057000000590000000000')
 
-
-def test_storage_local_path():
-    abs_path = 'file:///'
-    relative_path = 'file://.'
-    assert kfserving.Storage.download(abs_path) == abs_path.replace("file://", "", 1)
-    assert kfserving.Storage.download(relative_path) == relative_path.replace("file://", "", 1)
-
-
-def test_storage_local_path_exception():
-    not_exist_path = 'file:///some/random/path'
-    with pytest.raises(Exception):
-        kfserving.Storage.download(not_exist_path)
-
-
 def test_no_prefix_local_path():
     abs_path = '/'
     relative_path = '.'
