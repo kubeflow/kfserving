@@ -34,6 +34,7 @@ const (
 	PvcURIPrefix                            = "pvc://"
 	PvcSourceMountName                      = "kfserving-pvc-source"
 	PvcSourceMountPath                      = "/mnt/pvc"
+	StorageInitializerInjectionError        = "Invalid configuration: cannot find model server container or STORAGE_URI env"
 )
 
 type StorageInitializerConfig struct {
@@ -88,24 +89,29 @@ func (mi *StorageInitializerInjector) InjectStorageInitializer(pod *v1.Pod) erro
 		return nil
 	}
 
-	// Don't inject if InitContianer already injected
+	// Don't inject if InitContainer already injected
 	for _, container := range pod.Spec.InitContainers {
 		if strings.Compare(container.Name, StorageInitializerContainerName) == 0 {
 			return nil
 		}
 	}
 
-	// Find the kfserving-container (this is the model inference server)
-	var userContainer *v1.Container
-	for idx, container := range pod.Spec.Containers {
+	// Find the containers with storage URI
+	var userContainers []*v1.Container
+	for _, container := range pod.Spec.Containers {
 		if strings.Compare(container.Name, constants.InferenceServiceContainerName) == 0 {
-			userContainer = &pod.Spec.Containers[idx]
-			break
+			userContainers = append(userContainers, &container)
+			continue
+		}
+		for _, env := range container.Env {
+			if strings.Compare(env.Name, constants.CustomSpecStorageUriEnvVarKey) == 0 {
+				userContainers = append(userContainers, &container)
+			}
 		}
 	}
 
-	if userContainer == nil {
-		return fmt.Errorf("Invalid configuration: cannot find container: %s", constants.InferenceServiceContainerName)
+	if len(userContainers) == 0 {
+		return fmt.Errorf(StorageInitializerInjectionError)
 	}
 
 	podVolumes := []v1.Volume{}
@@ -139,7 +145,9 @@ func (mi *StorageInitializerInjector) InjectStorageInitializer(pod *v1.Pod) erro
 		storageInitializerMounts = append(storageInitializerMounts, pvcSourceVolumeMount)
 
 		// Since the model path is linked from source pvc, userContainer also need to mount the pvc.
-		userContainer.VolumeMounts = append(userContainer.VolumeMounts, pvcSourceVolumeMount)
+		for i, _ := range pod.Spec.Containers {
+			pod.Spec.Containers[i].VolumeMounts = append(pod.Spec.Containers[i].VolumeMounts, pvcSourceVolumeMount)
+		}
 
 		// modify the sourceURI to point to the PVC path
 		srcURI = PvcSourceMountPath + "/" + pvcPath
@@ -167,7 +175,7 @@ func (mi *StorageInitializerInjector) InjectStorageInitializer(pod *v1.Pod) erro
 		storageInitializerImage = mi.config.Image
 	}
 
-	securityContext := userContainer.SecurityContext.DeepCopy()
+	securityContext := userContainers[0].SecurityContext.DeepCopy()
 	// Add an init container to run provisioning logic to the PodSpec
 	initContainer := &v1.Container{
 		Name:  StorageInitializerContainerName,
@@ -197,11 +205,13 @@ func (mi *StorageInitializerInjector) InjectStorageInitializer(pod *v1.Pod) erro
 		MountPath: constants.DefaultModelLocalMountPath,
 		ReadOnly:  true,
 	}
-	userContainer.VolumeMounts = append(userContainer.VolumeMounts, sharedVolumeReadMount)
-	// Change the CustomSpecStorageUri env variable value to the default model path if present
-	for index, envVar := range userContainer.Env {
-		if envVar.Name == constants.CustomSpecStorageUriEnvVarKey && envVar.Value != "" {
-			userContainer.Env[index].Value = constants.DefaultModelLocalMountPath
+	for i, _ := range pod.Spec.Containers {
+		pod.Spec.Containers[i].VolumeMounts = append(pod.Spec.Containers[i].VolumeMounts, sharedVolumeReadMount)
+		// Change the CustomSpecStorageUri env variable value to the default model path if present
+		for index, envVar := range pod.Spec.Containers[i].Env {
+			if envVar.Name == constants.CustomSpecStorageUriEnvVarKey && envVar.Value != "" {
+				pod.Spec.Containers[i].Env[index].Value = constants.DefaultModelLocalMountPath
+			}
 		}
 	}
 

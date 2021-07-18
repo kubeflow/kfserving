@@ -34,7 +34,6 @@ transform = transforms.Compose(
         [transforms.ToTensor(),
          transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-
 def image_transform(instance):
     byte_array = base64.b64decode(instance['image_bytes']['b64'])
     image = Image.open(io.BytesIO(byte_array))
@@ -43,7 +42,6 @@ def image_transform(instance):
     res = transform(im)
     logging.info(res)
     return res.tolist()
-
 
 class ImageTransformer(kfserving.KFModel):
     def __init__(self, name: str, predictor_host: str):
@@ -141,3 +139,45 @@ Handling connection for 8080
 {"predictions": [2]}
 ```
 
+## Cocolate Transformer and Predictor
+KFServing by default deploys the Transformer and Predictor as separate services so you can deploy them on different devices and scale independently, however in some cases
+if you transformer is tightly coupled with the predictor and you want to do canary together you can choose to colocate the transformer and predictor in the same pod.
+
+This requires Knative 0.17+ which supports multi containers and transformer, predictor needs to listen on different port to avoid conflicts because
+they are collocated in the same pod now. `Transformer` is configured to listen on port 8000 and `Predictor` listens on port 8080, `Transformer` calls
+`Predictor` on port 8080 via local socket. 
+
+```yaml
+apiVersion: serving.kubeflow.org/v1beta1
+kind: InferenceService
+metadata:
+  name: torchserve-transformer
+spec:
+  predictor:
+    containers:
+    - image: kfserving/torchserve-image-transformer:latest
+      name: transformer-container
+      args:
+        - --model_name
+        - mnist
+        - --http_port
+        - "8000"
+        - --predictor_host
+        - localhost:8080
+      ports:
+        - containerPort: 8000
+          protocol: TCP
+      env:
+        - name: STORAGE_URI
+          value: gs://kfserving-examples/models/torchserve/image_classifier
+    - image: kfserving/torchserve-kfs:0.3.0
+      name: kfserving-container
+      args:
+        - torchserve
+        - --start
+        - --model-store=/mnt/models/model-store
+        - --ts-config=/mnt/models/config/config.properties
+      env:
+        - name: STORAGE_URI 
+          value: gs://kfserving-examples/models/torchserve/image_classifier
+``` 
